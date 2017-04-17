@@ -1,0 +1,28 @@
+{
+  "name": "construction-network",
+  "version": "0.0.1",
+  "description": "Construction Project Bidding Network",
+  "scripts": {
+    "prepublish": "mkdirp ./dist && composer archive create  --sourceType dir --sourceName . -a ./dist/construction-network.bna",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Chien",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "composer-admin": "latest",
+    "composer-cli": "latest",
+    "composer-client": "latest",
+    "composer-connector-embedded": "latest",
+    "license-check": "^1.1.5",
+    "mkdirp": "^0.5.1"
+  },
+  "license-check-config": {
+    "src": [
+      "**/*.cto"
+    ],
+    "path": "header.txt",
+    "blocking": true,
+    "logInfo": false,
+    "logError": true
+  }
+}

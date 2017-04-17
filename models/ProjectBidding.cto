@@ -1,0 +1,130 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Defines a data model for a construction project bidding
+ */
+namespace org.acme.project.bidding
+
+asset Project identified by id {
+  o String id
+  --> Member owner
+}
+
+enum Status {
+  o CONCEPTUAL
+  o DESIGN
+  o FINAL_PLANNING
+  o PRE_CONSTRUCTION
+  o GC_BIDDING
+  o SUB_BIDDING
+  o POST_BIDDING
+  o BID_RESULTS
+  o AWARD
+  o UNDER_CONSTRUCTION
+  o OCCUPANCY
+  o ABANDONED
+}
+
+enum Sector {
+  o PRIVATE
+  o PUBLIC_ALL
+  o PUBLIC_CITY
+  o PUBLIC_COUNTY
+  o PUBLIC_FEDERAL
+  o PUBLIC_GENERAL
+  o PUBLIC_STATE
+}
+
+enum BuildingUse {
+  o AMUSEMENT_RECREATION
+  o ARENAS_STADIUMS
+  o BRIDGES_TUNNELS
+  o CASINOS
+  o CONVENTION_CENTERS
+  o EDUCATIONAL
+  o FINANCIAL
+  o FIRE_POLICE
+  o FITNESS_CENTERS
+  o HOTEL
+  o INDUSTRIAL
+  o LIBRARY
+  o MANUFACTURING
+  o MEDICAL
+  o MULTI_RESIDENTIAL
+  o MUSEUM
+  o OFFICE
+  o OTHER
+  o PARKING_GARAGE
+  o PARKS
+  o RESTAURANT
+  o RETAILS
+  o ROADS_HIGHWAYS
+  o PARKING_LOTS
+  o SWIMMING_POOLS
+  o THEATERS_AUDITORIUMS
+  o WAREHOUSE
+}
+
+enum ConstructionType {
+  o RENOVATION
+  o DEMOLITION
+  o SITE_WORK
+  o PAVING
+  o SERVICE_MAINTENANCE
+}
+
+enum ListingState {
+  o FOR_BIDDING
+  o RESERVE_NOT_MET
+  o AWARD
+}
+
+asset ProjectListing identified by listingId {
+  o String listingId
+  o Double estimateValue
+  o String description
+  o ListingState state
+  o Status status
+  o Sector sector
+  o BuildingUse buildingUse
+  o ConstructionType constructionType
+  o Offer[] offers optional
+  --> Project contract
+}
+
+abstract participant User identified by email {
+  o String email
+  o String firstName
+  o String lastName
+}
+
+participant Member extends User {
+  o Double balance
+}
+
+participant Auctioneer extends User {
+}
+
+transaction Offer identified by transactionId {
+  o String transactionId
+  o Double bidPrice
+  --> ProjectListing listing
+  --> Member member
+}
+
+transaction CloseBidding identified by transactionId {
+  o String transactionId
+  --> ProjectListing listing
+}
