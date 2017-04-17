@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "description": "Construction Project Bidding Network",
   "scripts": {
-    "prepublish": "mkdirp ./dist && composer archive create  --sourceType dir --sourceName . -a ./dist/construction-network.bna",
+    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/construction-network.bna",
     "licchk": "license-check",
     "postversion": "git push && git push --tags && npm publish",
     "test": "echo \"Error: no test specified\" && exit 1"
