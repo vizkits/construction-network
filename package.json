@@ -1,6 +1,6 @@
 {
   "name": "construction-network",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Construction Project Bidding Network",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/construction-network.bna",
