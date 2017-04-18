@@ -19,7 +19,7 @@ namespace org.acme.project.bidding
 
 asset Project identified by id {
   o String id
-  --> Member owner
+  --> Architect owner
 }
 
 enum Status {
@@ -100,8 +100,8 @@ asset ProjectListing identified by listingId {
   o Sector sector
   o BuildingUse buildingUse
   o ConstructionType constructionType
-  o Offer[] offers optional
-  --> Project contract
+  o Proposal[] proposals optional
+  --> Project project
 }
 
 abstract participant User identified by email {
@@ -110,18 +110,18 @@ abstract participant User identified by email {
   o String lastName
 }
 
-participant Member extends User {
+participant Contractor extends User {
   o Double balance
 }
 
-participant Auctioneer extends User {
+participant Architect extends User {
 }
 
-transaction Offer identified by transactionId {
+transaction Proposal identified by transactionId {
   o String transactionId
   o Double bidPrice
   --> ProjectListing listing
-  --> Member member
+  --> Contractor contractor
 }
 
 transaction CloseBidding identified by transactionId {
