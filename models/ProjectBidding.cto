@@ -20,6 +20,7 @@ namespace org.acme.project.bidding
 asset Project identified by id {
   o String id
   --> Architect owner
+  --> Contractor contractor
 }
 
 enum Status {
@@ -93,7 +94,7 @@ enum ListingState {
 
 asset ProjectListing identified by listingId {
   o String listingId
-  o Double estimateValue
+  o Double estimateCost
   o String description
   o ListingState state
   o Status status
@@ -108,10 +109,10 @@ abstract participant User identified by email {
   o String email
   o String firstName
   o String lastName
+  o Double balance
 }
 
 participant Contractor extends User {
-  o Double balance
 }
 
 participant Architect extends User {
